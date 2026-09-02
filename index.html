@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>שלמה אלטרס - יועץ מס</title>
-
   <!-- תגי Open Graph - אלה מה שוואטסאפ קורא ומציג בתצוגה המקדימה -->
   <meta property="og:title" content="שלמה אלטרס - יועץ מס">
   <meta property="og:description" content="לחצו כדי למלא את טופס איסוף החומרים לדוח השנתי">
   <meta property="og:image" content="https://shlomitax2026-bot.github.io/tax-link-shlomi/logo.png">
   <meta property="og:url" content="https://shlomitax2026-bot.github.io/tax-link-shlomi/">
   <meta property="og:type" content="website">
-
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -36,16 +34,11 @@
 <body>
   <img src="logo.png" alt="לוגו שלמה אלטרס">
   <p>מעביר אותך לטופס...</p>
-
   <script>
-    // קורא את הקישור האמיתי מתוך פרמטר ה-URL בשם "to"
-    // ומעביר אליו את המשתמש באופן מיידי.
-    // בוטים של וואטסאפ לא מריצים קוד JavaScript, ולכן הם לא יעברו לכאן -
-    // הם יישארו על תגי ה-Open Graph שלמעלה ויציגו את לוגו המשרד.
     const params = new URLSearchParams(window.location.search);
     const target = params.get("to");
     if (target) {
-      window.location.replace(decodeURIComponent(target));
+      window.location.replace(target);
     } else {
       document.querySelector("p").textContent = "לא נמצא קישור יעד.";
     }
