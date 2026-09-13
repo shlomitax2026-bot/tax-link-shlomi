@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>שלמה אלטרס - יועץ מס</title>
-  <!-- תגי Open Graph - אלה מה שוואטסאפ קורא ומציג בתצוגה המקדימה -->
   <meta property="og:title" content="שלמה אלטרס - יועץ מס">
   <meta property="og:description" content="לחצו כדי למלא את טופס איסוף החומרים לדוח השנתי">
   <meta property="og:image" content="https://shlomitax2026-bot.github.io/tax-link-shlomi/logo.png">
@@ -21,14 +20,8 @@
       background: #f4f4f4;
       text-align: center;
     }
-    img {
-      width: 120px;
-      margin-bottom: 20px;
-    }
-    p {
-      color: #333;
-      font-size: 18px;
-    }
+    img { width: 120px; margin-bottom: 20px; }
+    p { color: #333; font-size: 18px; }
   </style>
 </head>
 <body>
@@ -36,9 +29,24 @@
   <p>מעביר אותך לטופס...</p>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const target = params.get("to");
-    if (target) {
+
+    const APP_IDS = {
+      "1": "cbbd2716-26b3-494a-86b4-573d40cd1827",
+      "2": "e404e2e6-4e44-4443-a963-ab6555f06a78"
+    };
+
+    const appKey = params.get("a");
+    const row = params.get("r");
+    const view = params.get("v");
+    const legacyTarget = params.get("to");
+
+    if (appKey && row && view && APP_IDS[appKey]) {
+      const target = "https://www.appsheet.com/start/" + APP_IDS[appKey] +
+                     "#view=" + encodeURIComponent(view) +
+                     "&row=" + encodeURIComponent(row);
       window.location.replace(target);
+    } else if (legacyTarget) {
+      window.location.replace(legacyTarget);
     } else {
       document.querySelector("p").textContent = "לא נמצא קישור יעד.";
     }
